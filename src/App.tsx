@@ -2,7 +2,7 @@
  * @Author: lzr lzr@email.com
  * @Date: 2022-08-17 20:31:02
  * @LastEditors: lzr lzr@email.com
- * @LastEditTime: 2022-08-21 21:32:44
+ * @LastEditTime: 2022-08-21 21:59:47
  * @FilePath: /react-admin-demo/src/App.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -27,7 +27,7 @@ import Index from './pages/Index'
 import Home from './pages/Home/Home'
 import Login from './pages/Login/Login'
 import Lin1 from './pages/Lin/Lin1'
-import { router } from './route/index'
+import { router, Router } from './route/index'
 import './App.css'
 
 function App() {
@@ -65,7 +65,8 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>{Index()}</Routes>
+        {/* <Routes>{Index()}</Routes> */}
+        <Router />
       </BrowserRouter>
     </div>
   )

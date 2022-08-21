@@ -2,17 +2,13 @@
  * @Author: lzr lzr@email.com
  * @Date: 2022-08-17 20:36:17
  * @LastEditors: lzr lzr@email.com
- * @LastEditTime: 2022-08-21 20:24:30
+ * @LastEditTime: 2022-08-21 22:05:35
  * @FilePath: /react-admin-demo/src/route/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
-import Home from '../pages/Home/Home'
-import Login from '../pages/Login/Login'
-import View from '../pages/View/View'
-import Lin from '../pages/Lin/Lin'
-import Lin1 from '../pages/Lin/Lin1'
-import Lin2 from '../pages/Lin/Lin2'
-import Page404 from '../pages/Page404/Page404'
+import { Suspense, lazy } from 'react'
+import { useRoutes } from 'react-router-dom'
+
 interface Meta {
   needLogin?: boolean
   title: string
@@ -35,7 +31,7 @@ const router: IRoute[] = [
       needLogin: true,
       title: 'home',
     },
-    component: <Home />,
+    component: lazy(() => import('../pages/Home/Home')),
   },
   {
     key: 'view',
@@ -44,7 +40,7 @@ const router: IRoute[] = [
     meta: {
       title: 'view',
     },
-    component: <View />,
+    component: lazy(() => import('../pages/View/View')),
   },
   {
     key: 'login',
@@ -52,7 +48,7 @@ const router: IRoute[] = [
     meta: {
       title: 'login',
     },
-    component: <Login />,
+    component: lazy(() => import('../pages/Login/Login')),
   },
   {
     key: 'Lin',
@@ -60,7 +56,7 @@ const router: IRoute[] = [
     meta: {
       title: 'lin',
     },
-    component: <Lin />,
+    component: lazy(() => import('../pages/Lin/Lin')),
     children: [
       {
         key: 'Lin1',
@@ -68,7 +64,7 @@ const router: IRoute[] = [
         meta: {
           title: 'lin1',
         },
-        component: <Lin1 />,
+        component: lazy(() => import('../pages/Lin/Lin1')),
       },
       {
         key: 'Lin2',
@@ -76,7 +72,7 @@ const router: IRoute[] = [
         meta: {
           title: 'lin2',
         },
-        component: <Lin2 />,
+        component: lazy(() => import('../pages/Lin/Lin2')),
       },
     ],
   },
@@ -86,26 +82,42 @@ const router: IRoute[] = [
     meta: {
       title: '404',
     },
-    component: <Page404 />,
+    component: lazy(() => import('../pages/Page404/Page404')),
   },
 ]
-/**
- * @description: 全局路由拦截
- * @param {string} pathname 当前路由路径
- * @param {object} meta 当前路由自定义meta字段
- * @return {string} 需要跳转到其他页时，就返回一个该页的path路径，或返回resolve该路径的promise对象
- */
-const onRouteBefore = ({ pathname, meta }: { pathname: string; meta: any }) => {
-  // 动态修改页面title
-  if (meta.title !== undefined) {
-    document.title = meta.title
-  }
-  // 判断未登录跳转登录页
-  if (meta.needLogin) {
-    let token = localStorage.getItem('token')
-    if (!token) {
-      return '/login'
+
+//根据路径获取路由
+const checkAuth = (routers: any, path: String) => {
+  for (const data of routers) {
+    if (data.path == path) return data
+    if (data.children) {
+      const res: any = checkAuth(data.children, path)
+      if (res) return res
     }
   }
+  return null
 }
-export { router, onRouteBefore }
+
+// 路由处理方式
+const generateRouter = (routers: any) => {
+  return routers.map((item: any) => {
+    if (item.children) {
+      item.children = generateRouter(item.children)
+    }
+    item.element = (
+      <Suspense fallback={<div>加载中...</div>}>
+        {/* 把懒加载的异步路由变成组件装载进去 */}
+        <item.component />
+      </Suspense>
+    )
+    return item
+  })
+}
+
+const Router = () => useRoutes(generateRouter(router))
+const checkRouterAuth = (path: String) => {
+  let auth = null
+  auth = checkAuth(router, path)
+  return auth
+}
+export { router, checkRouterAuth, Router }

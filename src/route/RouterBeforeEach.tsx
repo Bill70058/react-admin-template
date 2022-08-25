@@ -15,13 +15,22 @@ const RouterBeforeEach = () => {
   const location = useLocation()
   const [auth, setAuth] = useState(false)
   useEffect(() => {
-    let obj = checkRouterAuth(location.pathname)
+    let path = location.pathname.split('/').pop()
+    console.log(path)
+    let obj = checkRouterAuth(String(path))
     let blLogin = sessionStorage.getItem('login')
-    if (obj && obj.auth && blLogin == 'false') {
+    if (obj && obj.meta.needLogin && !blLogin) {
       setAuth(false)
       navigate('/', { replace: true })
     } else {
       setAuth(true)
+      // 如果点击的有子路由则跳转到子路由第一个页面
+      // if (obj.meta?.isLeaf) {
+      //   navigate(`/index/${path}/${obj.children[0].path}`)
+      // }
+      if (path == 'index' || obj.key == 'login') {
+        navigate('/index/home')
+      }
     }
   })
   return auth ? <Outlet /> : null

@@ -27,8 +27,10 @@ import Index from './pages/Index'
 import Home from './pages/Home/Home'
 import Login from './pages/Login/Login'
 import Lin1 from './pages/Lin/Lin1'
+import SelfLayout from './pages/Layout/SelfLayout'
 import { router, Router } from './route/index'
 import './App.css'
+import 'antd/dist/antd.css'
 
 function App() {
   // const routerMap = () => {

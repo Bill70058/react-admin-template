@@ -14,20 +14,20 @@ import React from 'react'
 function Index() {
   return (
     <>
-      {router.map((route) => {
+      {router.map((route, index) => {
         if (route.meta.needLogin) {
           return (
-            <Route path={route.path} element={<IsLoginFun />} key={route.key} />
+            <Route path={route.path} element={<IsLoginFun />} key={index} />
           )
         } else {
           return (
-            <Route path={route.path} element={route.component} key={route.key}>
-              {route.children?.map((childRoute) => {
+            <Route path={route.path} element={route.component} key={index}>
+              {route.children?.map((childRoute, childIndex) => {
                 return (
                   <Route
-                    path={childRoute.path}
+                    path={childRoute.key}
                     element={childRoute.component}
-                    key={childRoute.key}
+                    key={childIndex}
                   />
                 )
               })}

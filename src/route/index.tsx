@@ -12,6 +12,7 @@ import { useRoutes } from 'react-router-dom'
 interface Meta {
   needLogin?: boolean
   title: string
+  isLeaf?: boolean
 }
 interface IRoute {
   key: string
@@ -25,54 +26,68 @@ interface IRoute {
 }
 const router: IRoute[] = [
   {
-    key: 'home',
-    path: '/home',
-    meta: {
-      needLogin: true,
-      title: 'home',
-    },
-    component: lazy(() => import('../pages/Home/Home')),
-  },
-  {
-    key: 'view',
-    path: '/',
-    exact: true,
-    meta: {
-      title: 'view',
-    },
-    component: lazy(() => import('../pages/View/View')),
-  },
-  {
     key: 'login',
-    path: '/login',
+    path: '/',
     meta: {
       title: 'login',
     },
     component: lazy(() => import('../pages/Login/Login')),
   },
   {
-    key: 'Lin',
-    path: 'lin/*',
+    key: '/index',
+    path: '/index',
     meta: {
-      title: 'lin',
+      needLogin: true,
+      title: 'index',
+      isLeaf: true,
     },
-    component: lazy(() => import('../pages/Lin/Lin')),
+    component: lazy(() => import('../pages/Layout/SelfLayout')),
     children: [
       {
-        key: 'Lin1',
-        path: 'lin1',
+        key: '/index/home',
+        path: 'home',
         meta: {
-          title: 'lin1',
+          title: 'home',
+          needLogin: true,
         },
-        component: lazy(() => import('../pages/Lin/Lin1')),
+        component: lazy(() => import('../pages/Home/Home')),
       },
       {
-        key: 'Lin2',
-        path: 'lin2',
+        key: '/index/view',
+        path: 'view',
+        exact: true,
         meta: {
-          title: 'lin2',
+          title: 'view',
+          needLogin: true,
         },
-        component: lazy(() => import('../pages/Lin/Lin2')),
+        component: lazy(() => import('../pages/View/View')),
+      },
+      {
+        key: '/index/lin',
+        path: 'lin',
+        meta: {
+          title: 'lin',
+          isLeaf: true,
+        },
+        component: lazy(() => import('../pages/Lin/Lin')),
+        children: [
+          {
+            key: '/index/lin/lin1',
+            path: 'lin1',
+            meta: {
+              title: 'lin1',
+            },
+            component: lazy(() => import('../pages/Lin/Lin1')),
+          },
+          {
+            key: '/index/lin/lin2',
+            path: 'lin2',
+            meta: {
+              title: 'lin2',
+            },
+            component: lazy(() => import('../pages/Lin/Lin2')),
+          },
+        ],
       },
     ],
   },

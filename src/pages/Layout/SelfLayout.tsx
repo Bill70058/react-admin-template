@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import RouterBeforeEach from 'route/RouterBeforeEach'
 import { router } from 'route/index'
-import { Layout, Menu, MenuProps } from 'antd'
+import { Layout, Menu, MenuProps, Button } from 'antd'
 const { Header, Sider, Content } = Layout
 
 function SelfLayout() {
+  const navigate = useNavigate()
   const [collapsed, setCollapsed] = useState(false)
   let childItems: any = []
   const location = useLocation()
@@ -63,6 +64,10 @@ function SelfLayout() {
       setOpenKey(latestOpenKey ? latestOpenKey : '')
     }
   }
+  const handleLogout = () => {
+    sessionStorage.removeItem('login');
+    navigate('/')
+  }
   return (
     <div>
       <Layout>
@@ -82,7 +87,7 @@ function SelfLayout() {
         <Layout className="site-layout">
           <Header
             className="site-layout-background"
-            style={{ paddingLeft: 15, backgroundColor: '#fff' }}
+            style={{ paddingLeft: 15, backgroundColor: '#fff', display: 'flex', justifyContent: 'space-between', 'alignItems': 'center' }}
           >
             {React.createElement(
               collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
@@ -91,6 +96,7 @@ function SelfLayout() {
                 onClick: () => setCollapsed(!collapsed),
               }
             )}
+            <Button danger onClick={handleLogout}>登出</Button>
           </Header>
           <Content
             className="site-layout-background"

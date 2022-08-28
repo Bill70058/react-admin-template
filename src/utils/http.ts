@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { message } from 'antd';
 // import cookie from '../utils/cookie'
 axios.defaults.baseURL = ''
 axios.interceptors.request.use(
@@ -15,6 +16,9 @@ axios.interceptors.request.use(
 )
 axios.interceptors.response.use(
   function (res) {
+    if (res.data.code !== 200) {
+      message.error(res.data.msg)
+    }
     return res.data
   },
   function (err) {

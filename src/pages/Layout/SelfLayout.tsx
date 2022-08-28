@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
-import RouterBeforeEach from '../../route/RouterBeforeEach'
-import { router } from '../../route/index'
+import RouterBeforeEach from 'route/RouterBeforeEach'
+import { router } from 'route/index'
 import { Layout, Menu, MenuProps } from 'antd'
 const { Header, Sider, Content } = Layout
 

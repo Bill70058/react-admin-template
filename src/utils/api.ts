@@ -7,14 +7,11 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import http from './http'
-let todoList = '/api/todo'
+let loginUrl = '/api/login'
 
 const api = {
-  getTodoList: (data?:object)=>{
-    return http.get(todoList, data)
-  },
-  addTodoList:(data:object)=>{
-    return http.post(todoList, data)
+  login:(data:object)=>{
+    return http.post(loginUrl, data)
   }
 }
 

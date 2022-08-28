@@ -71,7 +71,7 @@ function SelfLayout() {
   return (
     <div>
       <Layout>
-        <Sider trigger={null} collapsible collapsed={collapsed}>
+        <Sider trigger={null} collapsible collapsed={collapsed} style={{height: '100vh'}}>
           <div className="logo" />
           <Menu
             theme="dark"

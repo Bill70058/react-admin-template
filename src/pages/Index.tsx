@@ -2,14 +2,14 @@
  * @Author: lzr lzr@email.com
  * @Date: 2022-08-17 20:36:33
  * @LastEditors: lzr lzr@email.com
- * @LastEditTime: 2022-08-21 21:32:59
+ * @LastEditTime: 2022-09-11 17:49:46
  * @FilePath: /react-admin-demo/src/pages/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import Lin1 from './Lin/Lin1'
 import { router } from '../route/index'
 import { Routes, Route, Navigate, useLocation, Outlet } from 'react-router-dom'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function Index() {
   return (

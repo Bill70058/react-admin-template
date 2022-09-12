@@ -2,7 +2,7 @@
  * @Author: lzr lzr@email.com
  * @Date: 2022-08-17 20:36:17
  * @LastEditors: lzr lzr@email.com
- * @LastEditTime: 2022-09-12 17:35:38
+ * @LastEditTime: 2022-09-12 17:43:36
  * @FilePath: /react-admin-demo/src/route/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -157,7 +157,7 @@ const mapRouter = (routers: any) => {
 const Router = () => useRoutes(generateRouter(mapRouter(router)))
 const checkRouterAuth = (path: String) => {
   let auth = null
-  auth = checkAuth(router, path)
+  auth = checkAuth(mapRouter(router), path)
   return auth
 }
 export { router, checkRouterAuth, Router, mapRouter }

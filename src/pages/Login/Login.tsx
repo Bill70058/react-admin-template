@@ -2,7 +2,7 @@
  * @Author: lzr lzr@email.com
  * @Date: 2022-08-17 20:33:56
  * @LastEditors: lzr lzr@email.com
- * @LastEditTime: 2022-09-11 17:45:56
+ * @LastEditTime: 2022-09-12 17:18:26
  * @FilePath: /react-admin-demo/src/pages/Login/Login.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -17,7 +17,6 @@ import './Login.css'
 function Login() {
   const navigate = useNavigate()
   useEffect(() => {
-    store.subscribe(() => console.log(store.getState()))
     // store.dispatch(
     //   setInfo({
     //     username: 'admin',

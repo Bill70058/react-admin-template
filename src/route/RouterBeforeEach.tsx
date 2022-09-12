@@ -2,7 +2,7 @@
  * @Author: lzr lzr@email.com
  * @Date: 2022-08-21 22:06:23
  * @LastEditors: lzr lzr@email.com
- * @LastEditTime: 2022-08-21 22:06:30
+ * @LastEditTime: 2022-09-12 16:30:31
  * @FilePath: /react-admin-demo/src/route/RouterBeforeEach.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -19,6 +19,7 @@ const RouterBeforeEach = () => {
     console.log(path)
     let obj = checkRouterAuth(String(path))
     let blLogin = sessionStorage.getItem('login')
+    // 如果访问的是需要登录的页面
     if (obj && obj.meta.needLogin && !blLogin) {
       setAuth(false)
       navigate('/', { replace: true })

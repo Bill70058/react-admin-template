@@ -2,7 +2,7 @@
  * @Author: lzr lzr@email.com
  * @Date: 2022-08-17 20:31:02
  * @LastEditors: lzr lzr@email.com
- * @LastEditTime: 2022-08-21 21:59:47
+ * @LastEditTime: 2022-09-12 17:19:22
  * @FilePath: /react-admin-demo/src/App.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -31,8 +31,11 @@ import SelfLayout from './pages/Layout/SelfLayout'
 import { router, Router } from './route/index'
 import './App.css'
 import 'antd/dist/antd.css'
+import { store } from 'redux/store'
 
 function App() {
+  store.subscribe(() => console.log(store.getState()))
+
   // const routerMap = () => {
   //   return (
   //     <>

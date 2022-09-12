@@ -3,10 +3,16 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import RouterBeforeEach from 'route/RouterBeforeEach'
 import { router } from 'route/index'
+import { store } from 'redux/store'
+import { setInfo } from 'redux/counterSlice'
 import { Layout, Menu, MenuProps, Button } from 'antd'
 const { Header, Sider, Content } = Layout
 
 function SelfLayout() {
+  store.dispatch(setInfo(JSON.parse(sessionStorage.getItem('userInfo') || '')))
+  const userRouter = store.getState().userInfo.userInfo.route
+  console.log(userRouter)
+
   const navigate = useNavigate()
   const [collapsed, setCollapsed] = useState(false)
   let childItems: any = []
@@ -45,7 +51,9 @@ function SelfLayout() {
           } else {
             delete obj.children
           }
-          childItems.push(obj)
+          if (userRouter.includes(obj.key)) {
+            childItems.push(obj)
+          }
         })
       }
     }
@@ -65,13 +73,19 @@ function SelfLayout() {
     }
   }
   const handleLogout = () => {
-    sessionStorage.removeItem('login');
+    sessionStorage.removeItem('login')
+    sessionStorage.removeItem('userInfo')
     navigate('/')
   }
   return (
     <div>
       <Layout>
-        <Sider trigger={null} collapsible collapsed={collapsed} style={{height: '100vh'}}>
+        <Sider
+          trigger={null}
+          collapsible
+          collapsed={collapsed}
+          style={{ height: '100vh' }}
+        >
           <div className="logo" />
           <Menu
             theme="dark"
@@ -87,7 +101,13 @@ function SelfLayout() {
         <Layout className="site-layout">
           <Header
             className="site-layout-background"
-            style={{ paddingLeft: 15, backgroundColor: '#fff', display: 'flex', justifyContent: 'space-between', 'alignItems': 'center' }}
+            style={{
+              paddingLeft: 15,
+              backgroundColor: '#fff',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
           >
             {React.createElement(
               collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
@@ -96,7 +116,9 @@ function SelfLayout() {
                 onClick: () => setCollapsed(!collapsed),
               }
             )}
-            <Button danger onClick={handleLogout}>登出</Button>
+            <Button danger onClick={handleLogout}>
+              登出
+            </Button>
           </Header>
           <Content
             className="site-layout-background"

@@ -75,6 +75,8 @@ function SelfLayout() {
   const handleLogout = () => {
     sessionStorage.removeItem('login')
     sessionStorage.removeItem('userInfo')
+    store.dispatch(setInfo(['login']))
+    console.log(store.getState())
     navigate('/')
   }
   return (

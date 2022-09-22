@@ -16,6 +16,8 @@ import './Login.css'
 
 function Login() {
   const navigate = useNavigate()
+  const [form] = Form.useForm()
+  const [isRemember, setIsRemember] = useState(false)
   useEffect(() => {
     // store.dispatch(
     //   setInfo({
@@ -26,14 +28,26 @@ function Login() {
     if (sessionStorage.getItem('login')) {
       navigate('/index/home')
     }
+    // 登录自动填充用户名密码
+    form.setFieldsValue({ remember: localStorage.getItem('loginInfo') != null })
+    if (form.getFieldValue('remember')) {
+      let loginForm = JSON.parse(localStorage.getItem('loginInfo') || '')
+      form.setFieldsValue({
+        username: loginForm.username,
+        password: loginForm.password,
+      })
+    }
   })
   const onFinish = (values: any) => {
-    // console.log('Success:', values);
     handleLogin(values)
   }
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo)
+  }
+  const onFormChange = (e: any) => {
+    const { remember } = e
+    form.setFieldsValue({ remember })
   }
   interface LoginInter {
     username: string
@@ -43,6 +57,11 @@ function Login() {
     const reqData = {
       username: loginData.username,
       password: loginData.password,
+    }
+    if (form.getFieldValue('remember')) {
+      localStorage.setItem('loginInfo', JSON.stringify(reqData))
+    } else {
+      localStorage.removeItem('loginInfo')
     }
     api.login(reqData).then((res: any) => {
       if (res.code == 200) {
@@ -73,10 +92,12 @@ function Login() {
         name="basic"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
-        initialValues={{ remember: true }}
+        initialValues={{ remember: false }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
+        form={form}
+        onValuesChange={onFormChange}
       >
         <Form.Item
           label="Username"

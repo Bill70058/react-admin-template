@@ -73,6 +73,14 @@ const router: IRoute[] = [
         component: lazy(() => import('../pages/View/View')),
       },
       {
+        key: '/index/users',
+        path: 'users',
+        meta: {
+          title: 'users',
+        },
+        component: lazy(() => import('../pages/Users/Users')),
+      },
+      {
         key: '/index/lin',
         path: 'lin',
         meta: {
@@ -143,7 +151,7 @@ const generateRouter = (routers: any) => {
 const mapRouter = (routers: any) => {
   let routeArr: any[] = []
   routers.forEach((item: any) => {
-    if (userRoute.includes(item.meta.title)) {
+    if (userRoute.includes(item.meta.title) || userRoute.includes(item.path)) {
       routeArr.push(item)
     }
   })

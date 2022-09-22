@@ -72,7 +72,7 @@ const http = {
   get: (url:string, data?:object) => {
     return getPromise(url, data, 'get')
   },
-  post: (url:string, data:object, header?:object) => {
+  post: (url:string, data?:object, header?:object) => {
     return getPromise(url, data, 'post', header)
   },
   put: (url:string, data?:object) => {

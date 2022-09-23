@@ -11,7 +11,8 @@ let loginUrl = '/api/login'
 let userObj = {
   userUrl: '/api/users',
   updateUser: '/api/users/update',
-  updateByIdUser: '/api/users/updateById'
+  updateByIdUser: '/api/users/updateById',
+  deleteById: '/api/users/deleteById'
 }
 
 const api = {
@@ -25,7 +26,10 @@ const api = {
     return http.post(userObj.updateUser, data)
   },
   updateByIdUsers:(data?:any) => {
-    return http.post(userObj.updateByIdUser, data)
+    return http.put(userObj.updateByIdUser, data)
+  },
+  deleteByIdUsers:(data?:any) => {
+    return http.delete(userObj.deleteById, data)
   }
 }
 

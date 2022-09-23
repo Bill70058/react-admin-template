@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Input, Table, Space } from 'antd'
+import { Input, Table, Space, Popconfirm, message } from 'antd'
+import EditUser from './EditUser'
 import type { ColumnsType } from 'antd/es/table'
 import { AudioOutlined } from '@ant-design/icons'
 import api from '../../utils/api'
@@ -51,15 +52,28 @@ function Users() {
       render: (_, record) => {
         return (
           <Space size="middle">
-            <a>Edit</a>
-            <a>Delete</a>
+            {/* <a onClick={() => handleEdit(record)}>Edit</a> */}
+            <EditUser record={record} refreshData={() => searchFun()} />
+            <Popconfirm
+              title="确认删除？"
+              okText="确认"
+              cancelText="取消"
+              onConfirm={() => handleDelete(record)}
+            >
+              <a href="#">Delete</a>
+            </Popconfirm>
           </Space>
         )
       },
     },
   ]
-  const handleEdit = (record: any) => {
-    console.log(record)
+  const handleDelete = (record: any) => {
+    api.deleteByIdUsers({id: record._id}).then((res:any) => {
+      if (res.code == 200) {
+        message.success(res.msg)
+        searchFun()
+      }
+    })
   }
   const onSearch = (value: string) => {
     reqData.id = value
@@ -71,6 +85,7 @@ function Users() {
     }
   })
   const searchFun = (e?: any) => {
+    reqData.pageNum = 1
     if (e) {
       reqData.pageNum = e.current
     }

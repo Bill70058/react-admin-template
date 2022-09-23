@@ -6,7 +6,10 @@ axios.interceptors.request.use(
   function (config:any) {
     console.log(config.url)
     // 请求拦截器
-    config.headers['authorization'] = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTY2MDU1MDQwMSwiZXhwIjoxNjYwNTU0MDAxfQ.A-6Xllqi2Ft4IjT7cCXriSTkklQy7SYVR57TQpRugIY'
+    // config.headers['authorization'] = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTY2MDU1MDQwMSwiZXhwIjoxNjYwNTU0MDAxfQ.A-6Xllqi2Ft4IjT7cCXriSTkklQy7SYVR57TQpRugIY'
+    if (sessionStorage.getItem('login')) {
+      config.headers['authorization'] = sessionStorage.getItem('login')
+    }
     return config
   },
   function (err) {

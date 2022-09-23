@@ -6,11 +6,7 @@ import api from '../../utils/api'
 function EditUser(props: any) {
   const { record, refreshData } = props
   const [open, setOpen] = useState(false)
-  const { username, password } = record
-  const initData = {
-    username,
-    password,
-  }
+  const { username } = record
   const [form] = Form.useForm()
 
   const hideModal = () => {
@@ -24,15 +20,8 @@ function EditUser(props: any) {
     })
   }
   const handleEdit = () => {
+    form.setFieldValue('username', username)
     setOpen(true)
-  }
-
-  const onFinish = (values: any) => {
-    console.log('Success:', values)
-  }
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo)
   }
   return (
     <div>
@@ -41,7 +30,7 @@ function EditUser(props: any) {
         title="修改用户"
         visible={open}
         onOk={hideModal}
-        onCancel={hideModal}
+        onCancel={() => setOpen(false)}
         okText="确认"
         cancelText="取消"
       >
@@ -49,7 +38,6 @@ function EditUser(props: any) {
           name="basic"
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 16 }}
-          initialValues={initData}
           autoComplete="off"
           form={form}
         >

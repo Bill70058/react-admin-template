@@ -23,7 +23,7 @@ const api = {
     return http.get(userObj.userUrl, data)
   },
   postUsers:(data?:any) => {
-    return http.post(userObj.updateUser, data)
+    return http.post(userObj.userUrl, data)
   },
   updateByIdUsers:(data?:any) => {
     return http.put(userObj.updateByIdUser, data)

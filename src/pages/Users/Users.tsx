@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Input, Table, Space, Popconfirm, message } from 'antd'
+import './Users.css'
 import EditUser from './EditUser'
+import AddUser from './AddUser'
 import type { ColumnsType } from 'antd/es/table'
 import { AudioOutlined } from '@ant-design/icons'
 import api from '../../utils/api'
@@ -47,12 +49,11 @@ function Users() {
       render: (text: any) => <span>{text}</span>,
     },
     {
-      title: 'Action',
+      title: '操作',
       key: 'action',
       render: (_, record) => {
         return (
           <Space size="middle">
-            {/* <a onClick={() => handleEdit(record)}>Edit</a> */}
             <EditUser record={record} refreshData={() => searchFun()} />
             <Popconfirm
               title="确认删除？"
@@ -68,7 +69,7 @@ function Users() {
     },
   ]
   const handleDelete = (record: any) => {
-    api.deleteByIdUsers({id: record._id}).then((res:any) => {
+    api.deleteByIdUsers({ id: record._id }).then((res: any) => {
       if (res.code == 200) {
         message.success(res.msg)
         searchFun()
@@ -107,6 +108,9 @@ function Users() {
         allowClear
         style={{ width: 300, marginBottom: 15 }}
       />
+      <div className="add-btn">
+        <AddUser refreshData={() => searchFun()} />
+      </div>
       <Table
         dataSource={tableData}
         columns={columns}

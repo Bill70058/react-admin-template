@@ -10,16 +10,22 @@ function EditUser(props: any) {
   const [form] = Form.useForm()
 
   const hideModal = () => {
-    const { username } = form.getFieldsValue()
-    api.updateByIdUsers({ username, id: record._id }).then((res: any) => {
-      if (res.code == 200) {
-        setOpen(false)
-        message.success(res.msg)
-        refreshData()
-      }
-    })
+    form
+      .validateFields()
+      .then(() => {
+        const { username } = form.getFieldsValue()
+        api.updateByIdUsers({ username, id: record._id }).then((res: any) => {
+          if (res.code == 200) {
+            setOpen(false)
+            message.success(res.msg)
+            refreshData()
+          }
+        })
+      })
+      .catch(() => {})
   }
   const handleEdit = () => {
+    form.resetFields()
     form.setFieldValue('username', username)
     setOpen(true)
   }

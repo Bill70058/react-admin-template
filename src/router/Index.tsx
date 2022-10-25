@@ -10,13 +10,13 @@ import { lazy } from 'react'
 import { Navigate } from 'react-router-dom'
 
 const lazyLoad = (moduleName: string) => {
-  const Module = lazy(() => import(`../pages/${moduleName}/Index`))
+  const Module = lazy(() => import(`../pages/${moduleName}`))
   return <Module />
 }
 
 const AppraisalInit = ({ children }: any) => {
   const token = localStorage.getItem('token')
-  return token ? lazyLoad('sand-box') : <Navigate to="/login" />
+  return token ? children : <Navigate to="/login" />
 }
 
 interface Router {
@@ -36,14 +36,30 @@ const routes: Array<Router> = [
     element: <AppraisalInit>{lazyLoad('sand-box')}</AppraisalInit>,
     children: [
       {
+        path: '',
+        element: <Navigate to="home"/>
+      },
+      {
         path: 'home',
-        element: <Navigate to="home" />,
+        element: lazyLoad('sand-box/home'),
       },
       {
         path: '*',
         element: lazyLoad('sand-box/not-found'),
       },
     ],
+  },
+  {
+    path: '/lin',
+    element: lazyLoad('lin/Lin')
+  },
+  {
+    path: '/lin1',
+    element: lazyLoad('lin/Lin1')
+  },
+  {
+    path: '/lin2',
+    element: lazyLoad('lin/Lin2')
   },
   {
     path: '*',

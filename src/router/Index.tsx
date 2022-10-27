@@ -19,6 +19,11 @@ const AppraisalInit = ({ children }: any) => {
   return token ? children : <Navigate to="/login" />
 }
 
+const IsLogin = ({ children }: any) => {
+  const token = localStorage.getItem('token')
+  return token ?  <Navigate to="/home"/> : children
+}
+
 interface Router {
   name?: string
   path: string
@@ -29,7 +34,7 @@ interface Router {
 const routes: Array<Router> = [
   {
     path: '/login',
-    element: lazyLoad('login'),
+    element: <IsLogin>{lazyLoad('login')}</IsLogin>,
   },
   {
     path: '/',
@@ -42,6 +47,24 @@ const routes: Array<Router> = [
       {
         path: 'home',
         element: lazyLoad('sand-box/home'),
+      },
+      {
+        path: 'new',
+        element: lazyLoad('sand-box/news'),
+        children: [
+          {
+            path: '',
+            element: <Navigate to="news1"/>
+          },
+          {
+            path: 'news',
+            element: lazyLoad('sand-box/news/news')
+          },
+          {
+            path: 'news1',
+            element: lazyLoad('sand-box/news/news1')
+          }
+        ]
       },
       {
         path: '*',

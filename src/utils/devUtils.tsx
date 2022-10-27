@@ -31,3 +31,22 @@ export function deepCopy(obj: any, wekmap = new WeakMap()) {
   }
   return newObj
 }
+
+// 映射菜单图标数组 本地无法存储react节点 所以需要再取值是进行映射
+export const mapIconMenus = (menus: any, find: any = []) => {
+  for (const menu of menus) {
+    if (menu.children?.length) {
+      menu.children = mapIconMenus(menu.children, []);
+    }
+    if (menu.children?.length === 0) {
+      delete menu.children;
+    }
+    // if (iconList[menu.key]) {
+    //   menu.icon = iconList[menu.key];
+    // }
+    if (menu.pagepermisson) {
+      find.push(menu);
+    }
+  }
+  return find;
+};

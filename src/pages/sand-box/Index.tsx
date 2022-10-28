@@ -23,6 +23,12 @@ const { Header, Sider, Content } = Layout;
 function Index() {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate()
+  const handleLogOut = () => {
+    sessionStorage.removeItem('login')
+    sessionStorage.removeItem('userInfo')
+    navigate('/login')
+  }
   return <div>
      <Layout>
       <SideMenu collapsed={collapsed}/>
@@ -32,7 +38,7 @@ function Index() {
             className: 'trigger',
             onClick: () => setCollapsed(!collapsed),
           })}
-          <Button style={{float: 'right', transform: 'translate(10px, 15px)'}} danger>退出</Button>
+          <Button style={{float: 'right', transform: 'translate(10px, 15px)'}} danger onClick={handleLogOut}>退出</Button>
         </Header>
         <Content
           className="site-layout-background"

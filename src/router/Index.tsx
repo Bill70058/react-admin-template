@@ -15,13 +15,13 @@ const lazyLoad = (moduleName: string) => {
 }
 
 const AppraisalInit = ({ children }: any) => {
-  const token = localStorage.getItem('token')
-  return token ? children : <Navigate to="/login" />
+  const login = sessionStorage.getItem('login')
+  return login ? children : <Navigate to="/login" />
 }
 
 const IsLogin = ({ children }: any) => {
-  const token = localStorage.getItem('token')
-  return token ?  <Navigate to="/home"/> : children
+  const login = sessionStorage.getItem('login')
+  return login ?  <Navigate to="/home"/> : children
 }
 
 interface Router {

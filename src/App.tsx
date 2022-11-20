@@ -8,7 +8,7 @@
  */
 import './App.css'
 import React, { useState, useEffect } from 'react'
-import routes from './router/Index'
+import routes from './router'
 import { useRoutes } from 'react-router-dom'
 import { handelFilterElement, handelEnd } from './utils/routersFilter'
 import { deepCopy } from './utils/devUtils'

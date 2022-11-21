@@ -1,10 +1,19 @@
+/*
+ * @Author: lzr lzr@email.com
+ * @Date: 2022-11-20 14:03:14
+ * @LastEditors: lzr lzr@email.com
+ * @LastEditTime: 2022-11-21 22:19:12
+ * @FilePath: /react-admin-template/src/utils/api.ts
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import http from './https'
 let loginUrl = '/api/login'
 let userObj = {
   userUrl: '/api/users',
   updateUser: '/api/users/update',
   updateByIdUser: '/api/users/updateById',
-  deleteById: '/api/users/deleteById'
+  deleteById: '/api/users/deleteById',
+  pageList: '/api/pages'
 }
 
 const api = {
@@ -22,6 +31,9 @@ const api = {
   },
   deleteByIdUsers: (data?: any) => {
     return http.delete(userObj.deleteById, data)
+  },
+  getPages: () => {
+    return http.get(userObj.pageList)
   }
 }
 

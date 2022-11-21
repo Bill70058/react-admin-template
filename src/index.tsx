@@ -2,24 +2,28 @@
  * @Author: lzr lzr@email.com
  * @Date: 2022-10-15 19:38:01
  * @LastEditors: lzr lzr@email.com
- * @LastEditTime: 2022-10-15 20:22:03
+ * @LastEditTime: 2022-11-21 22:27:25
  * @FilePath: /react-admin-template/src/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
-import React, {Suspense} from 'react'
+import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import Loading from './components/loading'
 import { BrowserRouter } from 'react-router-dom'
+import zhCN from 'antd/es/locale/zh_CN'
+import { ConfigProvider } from 'antd'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <BrowserRouter>
-    <Suspense fallback={<Loading/>}>
-      <App />
+    <Suspense fallback={<Loading />}>
+      <ConfigProvider locale={zhCN}>
+        <App />
+      </ConfigProvider>
     </Suspense>
   </BrowserRouter>
 )

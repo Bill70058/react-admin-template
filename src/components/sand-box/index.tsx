@@ -1,8 +1,8 @@
 /*
  * @Author: lzr lzr@email.com
  * @Date: 2022-11-20 14:03:14
- * @LastEditors: lzr lzr@email.com
- * @LastEditTime: 2022-11-21 22:23:15
+ * @LastEditors: bill Lin_k_Bill@163.com
+ * @LastEditTime: 2022-12-10 22:57:58
  * @FilePath: /react-admin-template/src/components/sand-box/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -112,10 +112,10 @@ const SideMenu = memo((props: any) => {
   }, [props.collapsed, selectOpen])
 
   return (
-    <Sider trigger={null} collapsible collapsed={collapsed}>
+    <Sider trigger={null} collapsible collapsed={collapsed} className="menu">
       <div className="logo" />
       <Menu
-        theme="dark"
+        className="menu"
         mode="inline"
         selectedKeys={[path]}
         defaultOpenKeys={[selectOpen]}

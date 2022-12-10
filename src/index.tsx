@@ -1,8 +1,8 @@
 /*
  * @Author: lzr lzr@email.com
  * @Date: 2022-10-15 19:38:01
- * @LastEditors: lzr lzr@email.com
- * @LastEditTime: 2022-11-21 22:27:25
+ * @LastEditors: bill Lin_k_Bill@163.com
+ * @LastEditTime: 2022-12-10 23:34:58
  * @FilePath: /react-admin-template/src/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */

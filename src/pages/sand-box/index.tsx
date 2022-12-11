@@ -2,7 +2,7 @@
  * @Author: lzr lzr@email.com
  * @Date: 2022-10-15 19:54:35
  * @LastEditors: bill Lin_k_Bill@163.com
- * @LastEditTime: 2022-12-10 23:46:24
+ * @LastEditTime: 2022-12-11 15:59:16
  * @FilePath: /react-admin-template/src/pages/Layout/Index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -30,16 +30,8 @@ function Index() {
     navigate('/login')
   }
   const changeTheme = (e: boolean) => {
-    modifyVars({
-      '@selfThemeColor': '#fff',
-    })
-      .then(() => {
-        console.log('修改成功')
-        refreshStyles()
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    let thtmeColor = e ? 'rgb(225, 243, 216)' : 'rgb(198, 226, 255)'
+    document.body.style.setProperty('--selfThemeColor', thtmeColor)
   }
   return (
     <div>
@@ -58,7 +50,7 @@ function Index() {
               }
             )}
             <span style={{ marginLeft: '30px' }}>
-              <span>更换主题颜色：</span>
+              <span>更换侧边栏颜色：</span>
               <Switch
                 checkedChildren="开启"
                 unCheckedChildren="关闭"
